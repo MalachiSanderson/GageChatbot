@@ -93,8 +93,6 @@ public class ChatbotGUI extends Application
 				System.out.println("\t[Text Field was empty]");
 			}
 		});
-
-
 		//Key Press Stuff...
 		tF.setOnKeyPressed(event -> 
 		{
@@ -103,8 +101,6 @@ public class ChatbotGUI extends Application
 				submit.fire();
 			}
 		});
-
-
 	}
 
 
