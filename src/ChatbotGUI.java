@@ -45,10 +45,10 @@ public class ChatbotGUI extends Application
 	Scene scene = new Scene(bp,750,600);
 	TextField tF = new TextField();
 	public String inputtedMessage;
-	//public final static ProcessInputs pInputs = new ProcessInputs();
+	public final static ProcessInputs pInputs = new ProcessInputs();
 
 	//THIS DETERMINES WHAT SOUND EFFECT TO PLAY ON MESSAGE SENT...
-	String audioFilePath = "Sounds\\CoinSFX.wav";
+	String audioFilePath = "src\\Sounds\\CoinSFX.wav";
 
 	//CONSTRUCTOR...
 	public ChatbotGUI()
@@ -139,7 +139,7 @@ public class ChatbotGUI extends Application
 	//SENDS INPUTS TO BOT FOR PROCESSING...
 	public static void sendInputToBot(String input)
 	{
-		//pInputs.process(input);
+		pInputs.process(input);
 	}
 
 
