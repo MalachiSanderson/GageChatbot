@@ -80,13 +80,12 @@ public class ChatbotGUI extends Application
 			{
 				inputtedMessage = tF.getText();
 				sendInputToBot(inputtedMessage);
-
 				displayInputedText(inputtedMessage);
-
 				//System.out.println("\t[TEXT WAS GATHERED]: " + inputtedMessage);
 
 				playSound(audioFilePath);
 				tF.clear();
+				displayOutputedText(pInputs.getWords());
 			}
 			else
 			{
@@ -160,9 +159,27 @@ public class ChatbotGUI extends Application
 
 
 	//[TODO] NEED TO MAKE METHOD FOR DISPLAYING INPUT AFTER IT'S PROCESSED BY BOT...
-	public void displayOutputedText()
+	public void displayOutputedText(String[] sentence)
 	{
-		//[TODO]...
+		String compiledSentence = "";
+		for(int i = 0; i<sentence.length; i++)
+		{
+			compiledSentence = compiledSentence + " [" + sentence[i] + "]";
+		}
+		
+		StackPane stackPane = new StackPane();
+		stackPane.setStyle("-fx-background-color: black");
+		pane.getChildren().add(stackPane);
+		
+		Text text = new Text("Bot read: " + compiledSentence );
+
+		Rectangle rect = new Rectangle();
+		stackPane.getChildren().addAll(rect,text);
+		rect.setFill(Color.LIME);
+		rect.setWidth(text.getLayoutBounds().getMaxX()*1.5);
+		rect.setHeight(30);
+
+		stackPane.setLayoutY(55);
 	}
 
 
