@@ -46,6 +46,9 @@ public class ChatbotGUI extends Application
 	TextField tF = new TextField();
 	public String inputtedMessage;
 	public final static ProcessInputs pInputs = new ProcessInputs();
+	public StackPane sPaneIn = new StackPane();
+	public StackPane sPaneOut = new StackPane();
+	
 
 	//THIS DETERMINES WHAT SOUND EFFECT TO PLAY ON MESSAGE SENT...
 	String audioFilePath = "src\\Sounds\\CoinSFX.wav";
@@ -67,8 +70,7 @@ public class ChatbotGUI extends Application
 	{
 		//Textfield stuff...
 		tF.setPromptText("Hello. Input Something to say to the bot.");
-
-
+		
 		//Submit button stuff...
 		Button submit = new Button("Submit");
 		pane.getChildren().add(submit);
@@ -78,23 +80,26 @@ public class ChatbotGUI extends Application
 		{
 			if(!tF.getText().trim().isEmpty()) 
 			{
+				pane.getChildren().remove(sPaneIn);
+				pane.getChildren().remove(sPaneOut);
+				sPaneIn = new StackPane();
+				sPaneOut = new StackPane();
+				
+				
 				inputtedMessage = tF.getText();
 				sendInputToBot(inputtedMessage);
-
-				displayInputedText(inputtedMessage);
-
+				displayInputedText(inputtedMessage,sPaneIn);
 				//System.out.println("\t[TEXT WAS GATHERED]: " + inputtedMessage);
 
 				playSound(audioFilePath);
 				tF.clear();
+				displayOutputedText(pInputs.getWords(),sPaneOut);
 			}
 			else
 			{
 				System.out.println("\t[Text Field was empty]");
 			}
 		});
-
-
 		//Key Press Stuff...
 		tF.setOnKeyPressed(event -> 
 		{
@@ -103,8 +108,6 @@ public class ChatbotGUI extends Application
 				submit.fire();
 			}
 		});
-
-
 	}
 
 
@@ -144,9 +147,8 @@ public class ChatbotGUI extends Application
 
 
 	//Display Inputed Text...
-	public void displayInputedText(String t)
+	public void displayInputedText(String t, StackPane stackPane)
 	{
-		StackPane stackPane = new StackPane();
 		stackPane.setStyle("-fx-background-color: black");
 		pane.getChildren().add(stackPane);
 		Text text = new Text("User: " + t);
@@ -157,16 +159,31 @@ public class ChatbotGUI extends Application
 		rect.setWidth(text.getLayoutBounds().getMaxX()*1.5);
 		rect.setHeight(30);
 
-
-
 		stackPane.setLayoutY(10);
 	}
 
 
 	//[TODO] NEED TO MAKE METHOD FOR DISPLAYING INPUT AFTER IT'S PROCESSED BY BOT...
-	public void displayOutputedText()
+	public void displayOutputedText(String[] sentence, StackPane stackPane)
 	{
-		//[TODO]...
+		String compiledSentence = "";
+		for(int i = 0; i<sentence.length; i++)
+		{
+			compiledSentence = compiledSentence + " [" + sentence[i] + "]";
+		}
+		
+		stackPane.setStyle("-fx-background-color: black");
+		pane.getChildren().add(stackPane);
+		
+		Text text = new Text("Bot read: " + compiledSentence );
+
+		Rectangle rect = new Rectangle();
+		stackPane.getChildren().addAll(rect,text);
+		rect.setFill(Color.LIME);
+		rect.setWidth(text.getLayoutBounds().getMaxX()*1.5);
+		rect.setHeight(30);
+
+		stackPane.setLayoutY(55);
 	}
 
 

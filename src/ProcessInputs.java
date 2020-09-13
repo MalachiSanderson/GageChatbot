@@ -36,4 +36,16 @@ public class ProcessInputs
 		splitSentence(s);
 		//changeWord();
 	}
+
+	
+	
+	//********************GETTERS AND SETTERS**************************
+	public String[] getWords() {
+		return words;
+	}
+
+	public void setWords(String[] words) {
+		this.words = words;
+	}
+	
 }
