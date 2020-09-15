@@ -51,24 +51,21 @@ public class ChatbotGUI extends Application
 	
 
 	//THIS DETERMINES WHAT SOUND EFFECT TO PLAY ON MESSAGE SENT...
-	String audioFilePath = "src\\Sounds\\CoinSFX.wav";
+	String audioFilePath = "src\\Files\\CoinSFX.wav";
 
 	//CONSTRUCTOR...
 	public ChatbotGUI()
 	{
 		//Basic set up stuff..
 		pane.setStyle("-fx-background-color: black");
-
-
 		makeNodes();
-
 	}
 
 
 	//MAKE BUTTONS (AND OTHER NODES?)...
 	public void makeNodes()
 	{
-		//Textfield stuff...
+		//Text field stuff...
 		tF.setPromptText("Hello. Input Something to say to the bot.");
 		
 		//Submit button stuff...
@@ -93,7 +90,7 @@ public class ChatbotGUI extends Application
 
 				playSound(audioFilePath);
 				tF.clear();
-				displayOutputedText(pInputs.getWords(),sPaneOut);
+				displayOutputedText(pInputs.getSentence(),sPaneOut);
 			}
 			else
 			{

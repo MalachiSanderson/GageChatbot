@@ -1,95 +1,103 @@
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.IOException;
-import java.util.Scanner;
 
 public class ProcessInputs 
 {
-	private String[] words; 
-	public String[] stopWords = {"is","the"};
+	private String[] sentence; 
+	public String[] stopWords;
 
-	public void splitSentence(String s)
-	{
-		words = s.split("\\s+");
-		printSentence();
-	}
-
+	//Constructor...
 	public ProcessInputs()
 	{
 		//....?
-		 readStopWordsFile();
-		
+		readStopWordsFile();
+
 	}
 
 
-	//Just a basic thing used to test if can access the input...
-	public void changeWord()
+	//Splits an inputed string into words[] 
+	public void splitSentence(String s)
 	{
-		words[0] = "NO";
+		sentence = s.split("\\s+");
 		printSentence();
 	}
 
+
+	//Will use the contents of the contents of stopWords[] to filter out stop words...
 	public void filterOutStopWords()  
 	{
-		
-		/*
-		
-		*/
-		for (int t  = 0; t < words.length; t++)
+		for (int t  = 0; t < sentence.length; t++)
 		{
 			for(int i=0; i< stopWords.length ; i++)
 			{
 				//System.out.println("\t"+words[t]+"\n");
-				if (words[t].contains(stopWords[i]))
+				if (sentence[t].equals(stopWords[i]))
 				{
-					words[t] = " "; 
+					sentence[t] = " "; 
 					//System.out.println("WORKED");
 				}
 			}
 		}
-		printSentence();
+		cleanUpSentence();
 	}
-	
+
+
+	//Reads stopwords.txt file and set the string array stopWords[] to equal its contents.
 	public void readStopWordsFile()
 	{
-		File stopWordsFile = new File("stopwords.txt");
-		String[] stopWords;
-		String line;
-		try 
+		File stopWordsFile = new File("src\\Files\\stopwords.txt");
+		stopWords = new String[ countNumberOfLinesInFile(stopWordsFile) ];
+		//System.out.println("stopWords.length = " + stopWords.length);
+		try
 		{
 			FileReader fr = new FileReader(stopWordsFile);
 			BufferedReader br = new BufferedReader(fr);
-			
-			for(int i = 0; i< 3; i++)
+
+			for(int i = 0; i < stopWords.length; i++)
 			{
-				try 
-				{
-					line = br.readLine();
-					stopWords = line.split(" ");
-				} 
-				catch (IOException e) 
-				{
-					System.out.println("\t\t[ERROR READING LINE " + i + " ]");
-				}
+				stopWords[i] = br.readLine();
+				//System.out.println("STOPWORDS.TXT [" + i + "] = "+ stopWords[i]);
 			}
-		} 
-		catch (FileNotFoundException e) 
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			br.close();
 		}
-		
-		
+		catch(Exception e)
+		{
+			System.out.println("\t\t[ERROR READING STOP WORDS FILE.]");
+			e.printStackTrace();
+		}	
 	}
-	
+
+	//Counts how many lines are in a file so it can form a String[] of size x...
+	public int countNumberOfLinesInFile(File file/*,String[] sArray*/)	//[TODO] Figure out why the string array part doesn't work..
+	{
+		int lines= 0;
+		try 
+		{
+			FileReader fr = new FileReader(file);
+			BufferedReader br = new BufferedReader(fr);
+			while( (br.readLine() )!=  null )
+			{
+				lines += 1;
+			}
+			//sArray = new String[lines];
+			br.close();
+		} 
+		catch (Exception e) 
+		{
+			System.out.println("\t\t[ERROR COUNTING NUMBER OF LINES]");
+		}
+		return lines;
+	}
+
+
+	//Prints the contents of the sentence[]...
 	public void printSentence()
 	{
 		System.out.println("\n");
-		for (int i = 0; i < words.length; i++) 
+		for (int i = 0; i < sentence.length; i++) 
 		{
-			System.out.println(words[i]);
+			System.out.println(sentence[i]);
 		}
 	}
 
@@ -102,16 +110,43 @@ public class ProcessInputs
 		filterOutStopWords();
 	}
 
-	
-	//********************GETTERS AND SETTERS**************************
-	public String[] getWords() 
+
+	//Returns the sentence[] to a single string to be read easily...
+	public String returnSentenceArrayToString()
 	{
-		return words;
+		String compiledSentence = "";
+		for(int i = 0; i < sentence.length; i++)
+		{
+			if(i == 0)
+			{
+				compiledSentence = compiledSentence + sentence[i];
+			}
+			else
+			{
+				compiledSentence = compiledSentence + " " +sentence[i];
+			}
+		}
+		return compiledSentence;
 	}
 
-	public void setWords(String[] words) 
+
+	//Cleans up sentence[] by removing empty spaces 
+	public void cleanUpSentence()
 	{
-		this.words = words;
+		splitSentence(returnSentenceArrayToString());
 	}
-	
+
+
+
+	//********************GETTERS AND SETTERS**************************
+	public String[] getSentence() 
+	{
+		return sentence;
+	}
+
+	public void setSentence(String[] words) 
+	{
+		this.sentence = words;
+	}
+
 }
