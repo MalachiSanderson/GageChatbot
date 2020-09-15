@@ -68,6 +68,7 @@ public class ProcessInputs
 		}	
 	}
 
+	
 	//Counts how many lines are in a file so it can form a String[] of size x...
 	public int countNumberOfLinesInFile(File file/*,String[] sArray*/)	//[TODO] Figure out why the string array part doesn't work..
 	{

@@ -160,7 +160,7 @@ public class ChatbotGUI extends Application
 	}
 
 
-	//[TODO] NEED TO MAKE METHOD FOR DISPLAYING INPUT AFTER IT'S PROCESSED BY BOT...
+	//METHOD FOR DISPLAYING INPUT AFTER IT'S PROCESSED BY BOT...
 	public void displayOutputedText(String[] sentence, StackPane stackPane)
 	{
 		String compiledSentence = "";
