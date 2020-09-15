@@ -1,4 +1,9 @@
-
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Scanner;
 
 public class ProcessInputs 
 {
@@ -14,6 +19,7 @@ public class ProcessInputs
 	public ProcessInputs()
 	{
 		//....?
+		 readStopWordsFile();
 		
 	}
 
@@ -25,28 +31,11 @@ public class ProcessInputs
 		printSentence();
 	}
 
-	public void readStopWords()  
+	public void filterOutStopWords()  
 	{
 		
 		/*
-		File myObj = new File("stopwords.txt");
-		Scanner sr = null;
-		try 
-		{
-			sr = new Scanner(myObj);
-		} 
-		catch (FileNotFoundException e) 
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		
-		String[] stopWords = null;
-		for(int i = 0; i< 3; i++)
-		{
-			stopWords[i]  = sr.toString();
-			sr.next();
-		}
 		*/
 		for (int t  = 0; t < words.length; t++)
 		{
@@ -61,6 +50,38 @@ public class ProcessInputs
 			}
 		}
 		printSentence();
+	}
+	
+	public void readStopWordsFile()
+	{
+		File stopWordsFile = new File("stopwords.txt");
+		String[] stopWords;
+		String line;
+		try 
+		{
+			FileReader fr = new FileReader(stopWordsFile);
+			BufferedReader br = new BufferedReader(fr);
+			
+			for(int i = 0; i< 3; i++)
+			{
+				try 
+				{
+					line = br.readLine();
+					stopWords = line.split(" ");
+				} 
+				catch (IOException e) 
+				{
+					System.out.println("\t\t[ERROR READING LINE " + i + " ]");
+				}
+			}
+		} 
+		catch (FileNotFoundException e) 
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
 	}
 	
 	public void printSentence()
@@ -78,7 +99,7 @@ public class ProcessInputs
 	{
 		splitSentence(s);
 		//changeWord();
-		readStopWords();
+		filterOutStopWords();
 	}
 
 	
