@@ -38,6 +38,7 @@ public class ProcessInputs
 				}
 			}
 		}
+		System.out.println("\tPOST STOP WORD FILTERING...");
 		cleanUpSentence();
 	}
 
