@@ -10,16 +10,15 @@ public class ProcessInputs
 	//Constructor...
 	public ProcessInputs()
 	{
-		//....?
 		readStopWordsFile();
-
 	}
 
 
-	//Splits an inputed string into words[] 
+	//Splits an inputed string into sentence[] and removes all non-letter characters and removes any capitalization...
 	public void splitSentence(String s)
 	{
-		sentence = s.split("\\s+");
+		//System.out.println(s);
+		sentence = s.replaceAll("[^a-zA-Z ]", "").toLowerCase().split("\\s+");
 		printSentence();
 	}
 
@@ -124,7 +123,7 @@ public class ProcessInputs
 			}
 			else
 			{
-				compiledSentence = compiledSentence + " " +sentence[i];
+				compiledSentence = compiledSentence + " " + sentence[i];
 			}
 		}
 		return compiledSentence;

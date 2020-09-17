@@ -114,14 +114,12 @@ public class ChatbotGUI extends Application
 		try
 		{
 			File soundPath = new File(soundLocation);
-
 			if(soundPath.exists())
 			{
 				AudioInputStream audioInput = AudioSystem.getAudioInputStream(soundPath);
 				Clip clip = AudioSystem.getClip();
 				clip.open(audioInput);
 				clip.start();
-
 				//JOptionPane.showMessageDialog(null,"Press Okay to stop playing");
 			}
 			else 
@@ -200,7 +198,7 @@ public class ChatbotGUI extends Application
 		bp.setTop(menuBar);
 		bp.setBottom(tF);
 		stage.setScene(scene);
-		stage.setTitle("Chatbot V 0.1 ");
+		stage.setTitle("BIG BUFORD V0.3 ");
 		stage.show();
 
 	}
