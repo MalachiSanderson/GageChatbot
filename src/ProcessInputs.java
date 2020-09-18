@@ -14,11 +14,21 @@ public class ProcessInputs
 	}
 
 
+	//THIS WILL BE THE MAIN STEPS OF PROCESSING THAT OCCURS TO THE USER'S INPUT...
+	public void process(String s)
+	{
+		splitSentence(s);
+		filterOutStopWords();
+		uwuTwanslatow();
+	}
+
+
 	//Splits an inputed string into sentence[] and removes all non-letter characters and removes any capitalization...
 	public void splitSentence(String s)
 	{
 		//System.out.println(s);
 		sentence = s.replaceAll("[^a-zA-Z ]", "").toLowerCase().split("\\s+");
+		//By removing the unwanted characters before splitting, you avoid having to loop through the elements.
 		printSentence();
 	}
 
@@ -68,9 +78,9 @@ public class ProcessInputs
 		}	
 	}
 
-	
+
 	//Counts how many lines are in a file so it can form a String[] of size x...
-	public int countNumberOfLinesInFile(File file/*,String[] sArray*/)	//[TODO] Figure out why the string array part doesn't work..
+	public int countNumberOfLinesInFile(File file)	//[TODO] Figure out why the string array part doesn't work..
 	{
 		int lines= 0;
 		try 
@@ -103,15 +113,6 @@ public class ProcessInputs
 	}
 
 
-	//THIS WILL BE THE MAIN STEPS OF PROCESSING THAT OCCURS TO THE USER'S INPUT...
-	public void process(String s)
-	{
-		splitSentence(s);
-		//changeWord();
-		filterOutStopWords();
-	}
-
-
 	//Returns the sentence[] to a single string to be read easily...
 	public String returnSentenceArrayToString()
 	{
@@ -138,6 +139,85 @@ public class ProcessInputs
 	}
 
 
+	//***********************************FURRY SPEECH TRANSLATOR************************************
+	public void uwuTwanslatow()
+	{
+		String word;
+
+		if(0.2 > randomFrom(0,1))
+		{
+			splitSentence("OwO notices message " + returnSentenceArrayToString() );
+		}
+		
+		for(int i = 0; i< sentence.length; i++)
+		{
+			if(sentence[i].contains("you"))
+			{
+				sentence[i] = "chu";
+			}
+			if(sentence[i].contains("fuck"))
+			{
+				sentence[i] = "fluff";
+			}
+			if(sentence[i].contains("bad"))
+			{
+				sentence[i] = "naughty";
+			}
+
+			if(sentence[i].contains("the"))
+			{
+				word = sentence[i] = "teh";
+				sentence[i] = word;
+			}
+			else if(sentence[i].contains("th"))
+			{
+				word = sentence[i].replaceAll("th","f");
+				sentence[i] = word;
+			}
+			else if(sentence[i].contains("t"))
+			{
+				word = sentence[i].replace('t', 'd');
+				sentence[i] = word;
+			}
+
+			if(sentence[i].contains("r"))
+			{
+				word = sentence[i].replace('r', 'w');
+				sentence[i] = word;
+				//System.out.println("\t\tr or l detected");
+			}
+			if(sentence[i].contains("l"))
+			{
+				word = sentence[i].replace('l', 'w');
+				sentence[i] = word;
+				//System.out.println("\t\tr or l detected");
+			}
+			if(sentence[i].contains("ck"))
+			{
+				word = sentence[i].replaceAll("ck","k");
+				sentence[i] = word;
+			}
+			
+			if(sentence[i].contains("danny"))
+			{
+				sentence[i] = "Daddy";
+			}
+		}
+		//printSentence();
+		splitSentence(returnSentenceArrayToString() + " uwu~");
+		//sentence[sentence.length] = sentence[sentence.length] + " UwU~~" ; 
+	}
+
+	//**********************************END OF THE CURSED SECTION***********************************
+
+
+	//Basic Random number Generator...
+	public static double randomFrom (double low, double high) 
+	{
+		double randNum = 0;
+		randNum = (Math.random()*(high-low) + low);
+		return randNum;
+	}
 
 	//********************GETTERS AND SETTERS**************************
 	public String[] getSentence() 

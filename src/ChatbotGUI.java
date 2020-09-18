@@ -79,14 +79,7 @@ public class ChatbotGUI extends Application
 				sPaneOut = new StackPane();
 				
 				
-				inputtedMessage = tF.getText();
-				sendInputToBot(inputtedMessage);
-				displayInputedText(inputtedMessage,sPaneIn);
-				//System.out.println("\t[TEXT WAS GATHERED]: " + inputtedMessage);
-
-				playSound(audioFilePath);
-				tF.clear();
-				displayOutputedText(pInputs.getSentence(),sPaneOut);
+				sendInputsToProcessor();
 			}
 			else
 			{
@@ -103,6 +96,18 @@ public class ChatbotGUI extends Application
 		});
 	}
 
+	//Method for actually sending Buford the input...
+	public void sendInputsToProcessor()
+	{
+		inputtedMessage = tF.getText();
+		sendInputToBot(inputtedMessage);
+		displayInputedText(inputtedMessage,sPaneIn);
+		//System.out.println("\t[TEXT WAS GATHERED]: " + inputtedMessage);
+
+		playSound(audioFilePath);
+		tF.clear();
+		displayOutputedText(pInputs.getSentence(),sPaneOut);
+	}
 
 	//PLAY SOUND EFFECT...
 	public void playSound(String soundLocation)
