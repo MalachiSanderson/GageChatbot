@@ -155,6 +155,10 @@ public class ProcessInputs
 			{
 				sentence[i] = "chu";
 			}
+			if(sentence[i].contains("hi"))
+			{
+				sentence[i] = "hai";
+			}
 			if(sentence[i].contains("fuck"))
 			{
 				sentence[i] = "fluff";
@@ -166,8 +170,11 @@ public class ProcessInputs
 
 			if(sentence[i].contains("the"))
 			{
-				word = sentence[i] = "teh";
-				sentence[i] = word;
+				sentence[i] = "teh";
+			}
+			else if(sentence[i].contains("to"))
+			{
+				sentence[i] = "tew";
 			}
 			else if(sentence[i].contains("th"))
 			{

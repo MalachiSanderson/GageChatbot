@@ -171,7 +171,7 @@ public class ChatbotGUI extends Application
 		stackPane.setStyle("-fx-background-color: black");
 		pane.getChildren().add(stackPane);
 		
-		Text text = new Text("Bot read: " + compiledSentence );
+		Text text = new Text("Buford: " + compiledSentence );
 
 		Rectangle rect = new Rectangle();
 		stackPane.getChildren().addAll(rect,text);
