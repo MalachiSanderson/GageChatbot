@@ -18,7 +18,7 @@ public class ProcessInputs
 	public void process(String s)
 	{
 		splitSentence(s);
-		filterOutStopWords();
+		//filterOutStopWords();
 		uwuTwanslatow();
 	}
 
@@ -48,7 +48,7 @@ public class ProcessInputs
 				}
 			}
 		}
-		System.out.println("\tPOST STOP WORD FILTERING...");
+		//System.out.println("\tPOST STOP WORD FILTERING...");
 		cleanUpSentence();
 	}
 

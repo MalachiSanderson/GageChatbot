@@ -199,7 +199,7 @@ public class ChatbotGUI extends Application
 		bp.setTop(menuBar);
 		bp.setBottom(tF);
 		stage.setScene(scene);
-		stage.setTitle("BIG BUFORD V0.3 ");
+		stage.setTitle("BIG BUFORD V -1.0 ");
 		stage.show();
 
 	}
