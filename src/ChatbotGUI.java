@@ -7,10 +7,7 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.swing.JOptionPane;
 
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Menu;
@@ -19,7 +16,6 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
@@ -83,14 +79,7 @@ public class ChatbotGUI extends Application
 				sPaneOut = new StackPane();
 				
 				
-				inputtedMessage = tF.getText();
-				sendInputToBot(inputtedMessage);
-				displayInputedText(inputtedMessage,sPaneIn);
-				//System.out.println("\t[TEXT WAS GATHERED]: " + inputtedMessage);
-
-				playSound(audioFilePath);
-				tF.clear();
-				displayOutputedText(pInputs.getSentence(),sPaneOut);
+				sendInputsToProcessor();
 			}
 			else
 			{
@@ -107,6 +96,18 @@ public class ChatbotGUI extends Application
 		});
 	}
 
+	//Method for actually sending Buford the input...
+	public void sendInputsToProcessor()
+	{
+		inputtedMessage = tF.getText();
+		sendInputToBot(inputtedMessage);
+		displayInputedText(inputtedMessage,sPaneIn);
+		//System.out.println("\t[TEXT WAS GATHERED]: " + inputtedMessage);
+
+		playSound(audioFilePath);
+		tF.clear();
+		displayOutputedText(pInputs.getSentence(),sPaneOut);
+	}
 
 	//PLAY SOUND EFFECT...
 	public void playSound(String soundLocation)
@@ -114,14 +115,12 @@ public class ChatbotGUI extends Application
 		try
 		{
 			File soundPath = new File(soundLocation);
-
 			if(soundPath.exists())
 			{
 				AudioInputStream audioInput = AudioSystem.getAudioInputStream(soundPath);
 				Clip clip = AudioSystem.getClip();
 				clip.open(audioInput);
 				clip.start();
-
 				//JOptionPane.showMessageDialog(null,"Press Okay to stop playing");
 			}
 			else 
@@ -200,7 +199,7 @@ public class ChatbotGUI extends Application
 		bp.setTop(menuBar);
 		bp.setBottom(tF);
 		stage.setScene(scene);
-		stage.setTitle("Chatbot V 0.1 ");
+		stage.setTitle("BIG BUFORD V0.3 ");
 		stage.show();
 
 	}
