@@ -144,7 +144,7 @@ public class ProcessInputs
 	{
 		String word;
 
-		if(0.2 > randomFrom(0,1))
+		if(0.1 > randomFrom(0,1))
 		{
 			splitSentence("OwO notices message " + returnSentenceArrayToString() );
 		}
@@ -204,7 +204,12 @@ public class ProcessInputs
 			}
 		}
 		//printSentence();
-		splitSentence(returnSentenceArrayToString() + " uwu~");
+		
+		if(0.4 > randomFrom(0,1))
+		{
+			splitSentence(returnSentenceArrayToString() + " UwU~~");
+		}
+		
 		//sentence[sentence.length] = sentence[sentence.length] + " UwU~~" ; 
 	}
 
