@@ -166,7 +166,7 @@ public class ProcessInputs
 				sentence[i] = "chu";
 			}
 
-			if(sentence[i].contains("hi"))
+			if(sentence[i].equals("hi")) 
 			{
 				sentence[i] = "hai";
 			}
