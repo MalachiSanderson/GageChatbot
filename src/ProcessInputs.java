@@ -33,6 +33,16 @@ public class ProcessInputs
 	}
 
 
+	//Splits an inputed string into sentence[] and removes all non-letter characters and removes any capitalization...
+	public void splitSentenceNOCAP(String s)
+	{
+		//System.out.println(s);
+		sentence = s.replaceAll("[^a-zA-Z ]", "").split("\\s+");
+		//By removing the unwanted characters before splitting, you avoid having to loop through the elements.
+		printSentence();
+	}
+
+
 	//Will use the contents of the contents of stopWords[] to filter out stop words...
 	public void filterOutStopWords()  
 	{
@@ -144,20 +154,38 @@ public class ProcessInputs
 	{
 		String word;
 
-		if(0.2 > randomFrom(0,1))
+		if(0.1 > randomFrom(0,1))
 		{
 			splitSentence("OwO notices message " + returnSentenceArrayToString() );
 		}
-		
+
 		for(int i = 0; i< sentence.length; i++)
 		{
 			if(sentence[i].contains("you"))
 			{
 				sentence[i] = "chu";
 			}
+
 			if(sentence[i].contains("hi"))
 			{
 				sentence[i] = "hai";
+			}
+
+			if(sentence[i].contains("summer"))
+			{
+				sentence[i] = "Summy Wummy";
+			}
+			if(sentence[i].contains("zack"))
+			{
+				sentence[i] = "Zackie poo bear";
+			}
+			if(sentence[i].contains("gage"))
+			{
+				sentence[i] = "Gagie wagie";
+			}
+			if(sentence[i].contains("viv") || sentence[i].contains("vivian"))
+			{
+				sentence[i] = "Vivvy Wivvy";
 			}
 			if(sentence[i].contains("fuck"))
 			{
@@ -204,14 +232,26 @@ public class ProcessInputs
 				word = sentence[i].replaceAll("ck","k");
 				sentence[i] = word;
 			}
-			
+
 			if(sentence[i].contains("danny"))
 			{
 				sentence[i] = "Daddy";
 			}
 		}
 		//printSentence();
-		splitSentence(returnSentenceArrayToString() + " uwu~");
+
+		if(0.15 > randomFrom(0,1))
+		{
+			splitSentenceNOCAP("Beware the false prophet walks among us.");
+			if(0.1 > randomFrom(0,1))
+			{
+				splitSentenceNOCAP(returnSentenceArrayToString() + " UwU~~");
+			}
+		}
+		else if(0.4 > randomFrom(0,1))
+		{
+			splitSentenceNOCAP(returnSentenceArrayToString() + " UwU~~");
+		}
 		//sentence[sentence.length] = sentence[sentence.length] + " UwU~~" ; 
 	}
 
