@@ -18,7 +18,7 @@ public class ProcessInputs
 	public void process(String s)
 	{
 		splitSentence(s);
-		filterOutStopWords();
+		//filterOutStopWords();
 		uwuTwanslatow();
 	}
 
@@ -155,6 +155,14 @@ public class ProcessInputs
 			{
 				sentence[i] = "chu";
 			}
+			if(sentence[i].contains("summer"))
+			{
+				sentence[i] = "Summy Wummy";
+			}
+			if(sentence[i].contains("zack"))
+			{
+				sentence[i] = "Zackie poo bear";
+			}
 			if(sentence[i].contains("fuck"))
 			{
 				sentence[i] = "fluff";
@@ -202,6 +210,7 @@ public class ProcessInputs
 			{
 				sentence[i] = "Daddy";
 			}
+			
 		}
 		//printSentence();
 		
