@@ -8,12 +8,16 @@ import javax.sound.sampled.Clip;
 import javax.swing.JOptionPane;
 
 import javafx.application.Application;
+import javafx.geometry.Orientation;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.ScrollBar;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
@@ -35,6 +39,10 @@ import javafx.util.Duration;
 public class ChatbotGUI extends Application
 {
 	//SET UP PUBLIC STUFF
+	public ImageView[] Images = new ImageView[2];
+	public int userMultiplier = 0;
+	public int bufordMultiplier = 0;
+	
 	Pane pane = new Pane();
 	MenuBar menuBar = new MenuBar();
 	BorderPane bp = new BorderPane();
@@ -56,6 +64,8 @@ public class ChatbotGUI extends Application
 		pane.setStyle("-fx-background-color: black");
 		makeNodes();
 	}
+	
+	
 
 
 	//MAKE BUTTONS (AND OTHER NODES?)...
@@ -65,6 +75,17 @@ public class ChatbotGUI extends Application
 		tF.setPromptText("Hello. Input Something to say to the bot.");
 		
 		//Submit button stuff...
+		
+	/*	 ScrollBar s = new ScrollBar();  
+	        s.setMin(0);  
+	        s.setMax(1000);  
+	        s.setValue(0);  
+	        s.setOrientation(Orientation.VERTICAL);     //Couldn't get to work. This is Scrollbar stuff
+	        s.setUnitIncrement(200);  
+	        s.setBlockIncrement(10);
+	        pane.getChildren().add(s); */
+	        
+	        
 		Button submit = new Button("Submit");
 		pane.getChildren().add(submit);
 		submit.setLayoutX(scene.getWidth()-55); 
@@ -73,12 +94,12 @@ public class ChatbotGUI extends Application
 		{
 			if(!tF.getText().trim().isEmpty()) 
 			{
-				pane.getChildren().remove(sPaneIn);
-				pane.getChildren().remove(sPaneOut);
+		//		pane.getChildren().remove(sPaneIn);
+		//		pane.getChildren().remove(sPaneOut);
 				sPaneIn = new StackPane();
 				sPaneOut = new StackPane();
 				
-				
+				imageConstructor();
 				sendInputsToProcessor();
 			}
 			else
@@ -94,6 +115,20 @@ public class ChatbotGUI extends Application
 				submit.fire();
 			}
 		});
+	}
+	
+	public void imageConstructor()
+	{	
+		Image bigBufordImage = new Image("bigbuford.png");
+		Image userImage = new Image("user.png");
+		Images[0] = new ImageView();
+		Images[0].setImage(bigBufordImage);
+	    Images[0].setFitHeight(50);
+	    Images[0].setFitWidth(50);
+	    Images[1] = new ImageView();
+		Images[1].setImage(userImage);
+	    Images[1].setFitHeight(50);
+	    Images[1].setFitWidth(50);
 	}
 
 	//Method for actually sending Buford the input...
@@ -145,31 +180,46 @@ public class ChatbotGUI extends Application
 	//Display Inputed Text...
 	public void displayInputedText(String t, StackPane stackPane)
 	{
+		int multiplier = 100 * userMultiplier;
+		
 		stackPane.setStyle("-fx-background-color: black");
 		pane.getChildren().add(stackPane);
+		pane.getChildren().add(Images[1]);
 		Text text = new Text("User: " + t);
 
 		Rectangle rect = new Rectangle();
 		stackPane.getChildren().addAll(rect,text);
 		rect.setFill(Color.WHITE);
 		rect.setWidth(text.getLayoutBounds().getMaxX()*1.5);
+	
+		
+		
+		
 		rect.setHeight(30);
 
-		stackPane.setLayoutY(10);
+		stackPane.setLayoutY(10 + multiplier);
+		stackPane.setLayoutX(600 - text.getLayoutBounds().getMaxX()* 1.4);
+		Images[1].setLayoutY(10 + multiplier);
+		Images[1].setLayoutX(650);
+		
+		userMultiplier++;
 	}
 
 
 	//METHOD FOR DISPLAYING INPUT AFTER IT'S PROCESSED BY BOT...
 	public void displayOutputedText(String[] sentence, StackPane stackPane)
 	{
+		int multiplier = 100 * bufordMultiplier;
 		String compiledSentence = "";
 		for(int i = 0; i<sentence.length; i++)
 		{
-			compiledSentence = compiledSentence + " [" + sentence[i] + "]";
+			compiledSentence = compiledSentence + " " + sentence[i];
 		}
 		
 		stackPane.setStyle("-fx-background-color: black");
 		pane.getChildren().add(stackPane);
+		pane.getChildren().add(Images[0]);
+		
 		
 		Text text = new Text("Buford: " + compiledSentence );
 
@@ -179,7 +229,12 @@ public class ChatbotGUI extends Application
 		rect.setWidth(text.getLayoutBounds().getMaxX()*1.5);
 		rect.setHeight(30);
 
-		stackPane.setLayoutY(55);
+		stackPane.setLayoutY(55 + multiplier);
+		stackPane.setLayoutX(65);
+		Images[0].setLayoutY(40 + multiplier);
+		Images[0].setLayoutX(10);
+		
+		bufordMultiplier++;
 	}
 
 
@@ -188,6 +243,8 @@ public class ChatbotGUI extends Application
 	{
 		//[TODO]...
 	}
+	
+
 
 
 	//START...
